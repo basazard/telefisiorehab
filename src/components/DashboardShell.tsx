@@ -27,13 +27,17 @@ export function DashboardShell({ role, userName, nav, children }: Props) {
             <Activity className="size-5" />
           </div>
           <div>
-            <p className="font-display font-bold text-sidebar-foreground leading-tight">Rehavia</p>
+            <p className="font-display font-bold text-sidebar-foreground leading-tight">
+              TeleFisioRehab
+            </p>
             <p className="text-[11px] text-muted-foreground">Home Rehab Platform</p>
           </div>
         </div>
 
         <div className="px-3 mt-2">
-          <p className="px-3 text-[11px] uppercase tracking-wider text-muted-foreground mb-2">{role} Menu</p>
+          <p className="px-3 text-[11px] uppercase tracking-wider text-muted-foreground mb-2">
+            {role} Menu
+          </p>
           <nav className="flex flex-col gap-1">
             {nav.map((item) => {
               const active = pathname === item.to;
@@ -46,7 +50,7 @@ export function DashboardShell({ role, userName, nav, children }: Props) {
                     "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
                     active
                       ? "bg-sidebar-primary text-sidebar-primary-foreground shadow-[var(--shadow-soft)]"
-                      : "text-sidebar-foreground hover:bg-sidebar-accent"
+                      : "text-sidebar-foreground hover:bg-sidebar-accent",
                   )}
                 >
                   <Icon className="size-4" />
@@ -61,8 +65,18 @@ export function DashboardShell({ role, userName, nav, children }: Props) {
           <div className="rounded-xl bg-[image:var(--gradient-soft)] p-4 border border-sidebar-border">
             <p className="text-xs font-semibold text-sidebar-foreground">Switch role</p>
             <div className="mt-2 flex gap-2">
-              <Link to="/patient" className="text-xs rounded-md px-2 py-1 bg-card text-card-foreground border">Patient</Link>
-              <Link to="/therapist" className="text-xs rounded-md px-2 py-1 bg-card text-card-foreground border">Therapist</Link>
+              <Link
+                to="/patient"
+                className="text-xs rounded-md px-2 py-1 bg-card text-card-foreground border"
+              >
+                Patient
+              </Link>
+              <Link
+                to="/therapist"
+                className="text-xs rounded-md px-2 py-1 bg-card text-card-foreground border"
+              >
+                Therapist
+              </Link>
             </div>
           </div>
         </div>

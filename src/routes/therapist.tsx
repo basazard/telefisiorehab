@@ -5,7 +5,7 @@ import { Progress } from "@/components/ui/progress";
 import { BarChart, Bar, ResponsiveContainer, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
 
 export const Route = createFileRoute("/therapist")({
-  head: () => ({ meta: [{ title: "Physiotherapist Dashboard — Rehavia" }] }),
+  head: () => ({ meta: [{ title: "Physiotherapist Dashboard — TeleFisioRehab" }] }),
   component: TherapistDashboard,
 });
 
@@ -18,7 +18,13 @@ const nav: NavItem[] = [
 ];
 
 const patients = [
-  { name: "Amelia Chen", cond: "Post-ACL knee", compliance: 87, score: 7.8, last: "Today" },
+  {
+    name: "Bagus Besar Bagaskara",
+    cond: "Post-ACL knee",
+    compliance: 87,
+    score: 7.8,
+    last: "Today",
+  },
   { name: "Marcus Holt", cond: "Rotator cuff", compliance: 64, score: 6.2, last: "Yesterday" },
   { name: "Priya Shah", cond: "Lower-back pain", compliance: 92, score: 8.4, last: "Today" },
   { name: "Jonas Weber", cond: "Hip replacement", compliance: 71, score: 6.9, last: "2 days ago" },
@@ -26,8 +32,12 @@ const patients = [
 ];
 
 const scoreData = [
-  { m: "Jan", v: 5.2 }, { m: "Feb", v: 5.8 }, { m: "Mar", v: 6.5 },
-  { m: "Apr", v: 6.9 }, { m: "May", v: 7.4 }, { m: "Jun", v: 7.8 },
+  { m: "Jan", v: 5.2 },
+  { m: "Feb", v: 5.8 },
+  { m: "Mar", v: 6.5 },
+  { m: "Apr", v: 6.9 },
+  { m: "May", v: 7.4 },
+  { m: "Jun", v: 7.8 },
 ];
 
 function TherapistDashboard() {
@@ -36,7 +46,9 @@ function TherapistDashboard() {
       <div className="grid gap-6">
         <div>
           <h1 className="text-2xl md:text-3xl font-display font-bold">Clinical Overview</h1>
-          <p className="text-sm text-muted-foreground mt-1">Adaptive monitoring across {patients.length} active home-rehab patients.</p>
+          <p className="text-sm text-muted-foreground mt-1">
+            Adaptive monitoring across {patients.length} active home-rehab patients.
+          </p>
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -52,9 +64,13 @@ function TherapistDashboard() {
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="font-display font-bold">Patient Data</h3>
-                <p className="text-xs text-muted-foreground">Compliance level & functional evaluation score</p>
+                <p className="text-xs text-muted-foreground">
+                  Compliance level & functional evaluation score
+                </p>
               </div>
-              <button className="text-xs font-medium rounded-md px-3 py-1.5 bg-secondary text-secondary-foreground">All patients</button>
+              <button className="text-xs font-medium rounded-md px-3 py-1.5 bg-secondary text-secondary-foreground">
+                All patients
+              </button>
             </div>
             <div className="mt-5 overflow-x-auto">
               <table className="w-full text-sm">
@@ -82,11 +98,15 @@ function TherapistDashboard() {
                       <td className="py-3 pr-4 w-40">
                         <div className="flex items-center gap-2">
                           <Progress value={p.compliance} className="h-1.5 flex-1" />
-                          <span className="text-xs font-medium w-9 text-right">{p.compliance}%</span>
+                          <span className="text-xs font-medium w-9 text-right">
+                            {p.compliance}%
+                          </span>
                         </div>
                       </td>
                       <td className="py-3 pr-4">
-                        <span className={`text-xs px-2 py-1 rounded-full ${p.score >= 7.5 ? "bg-success text-success-foreground" : "bg-warning text-warning-foreground"}`}>
+                        <span
+                          className={`text-xs px-2 py-1 rounded-full ${p.score >= 7.5 ? "bg-success text-success-foreground" : "bg-warning text-warning-foreground"}`}
+                        >
                           {p.score.toFixed(1)}
                         </span>
                       </td>
@@ -107,14 +127,19 @@ function TherapistDashboard() {
             <p className="text-xs text-muted-foreground">Upcoming sessions</p>
             <ul className="mt-4 space-y-3">
               {[
-                { n: "Amelia Chen", t: "11:30", in: "in 25 min" },
+                { n: "Bagus Besar Bagaskara", t: "11:30", in: "in 25 min" },
                 { n: "Jonas Weber", t: "14:00", in: "in 2h" },
                 { n: "Priya Shah", t: "16:45", in: "later today" },
               ].map((s) => (
-                <li key={s.n} className="rounded-xl bg-[image:var(--gradient-soft)] p-3 flex items-center justify-between">
+                <li
+                  key={s.n}
+                  className="rounded-xl bg-[image:var(--gradient-soft)] p-3 flex items-center justify-between"
+                >
                   <div>
                     <p className="text-sm font-semibold">{s.n}</p>
-                    <p className="text-xs text-muted-foreground">{s.t} · {s.in}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {s.t} · {s.in}
+                    </p>
                   </div>
                   <button className="size-9 rounded-full bg-primary text-primary-foreground grid place-items-center hover:opacity-90">
                     <Phone className="size-4" />
@@ -139,7 +164,13 @@ function TherapistDashboard() {
                   <CartesianGrid strokeDasharray="3 3" stroke="oklch(0.90 0.02 195)" />
                   <XAxis dataKey="m" stroke="oklch(0.50 0.03 210)" fontSize={12} />
                   <YAxis stroke="oklch(0.50 0.03 210)" fontSize={12} domain={[0, 10]} />
-                  <Tooltip contentStyle={{ background: "var(--color-card)", border: "1px solid var(--color-border)", borderRadius: 12 }} />
+                  <Tooltip
+                    contentStyle={{
+                      background: "var(--color-card)",
+                      border: "1px solid var(--color-border)",
+                      borderRadius: 12,
+                    }}
+                  />
                   <Bar dataKey="v" fill="oklch(0.72 0.13 165)" radius={[8, 8, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
@@ -153,7 +184,12 @@ function TherapistDashboard() {
             <ul className="mt-4 divide-y">
               {[
                 { p: "Sofia Rossi", e: "Ankle mobility · 12 min", c: 98, d: "Today, 09:12" },
-                { p: "Amelia Chen", e: "Quad strengthening · 18 min", c: 87, d: "Today, 08:30" },
+                {
+                  p: "Bagus Besar Bagaskara",
+                  e: "Quad strengthening · 18 min",
+                  c: 87,
+                  d: "Today, 08:30",
+                },
                 { p: "Priya Shah", e: "Core stability · 22 min", c: 92, d: "Yesterday" },
                 { p: "Marcus Holt", e: "Shoulder ROM · 15 min", c: 64, d: "Yesterday" },
               ].map((s, i) => (

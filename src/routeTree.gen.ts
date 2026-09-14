@@ -12,6 +12,19 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TherapistRouteImport } from './routes/therapist'
 import { Route as PatientRouteImport } from './routes/patient'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TherapistIndexRouteImport } from './routes/therapist.index'
+import { Route as PatientIndexRouteImport } from './routes/patient.index'
+import { Route as TherapistTeleconsultationRouteImport } from './routes/therapist.teleconsultation'
+import { Route as TherapistScoreRouteImport } from './routes/therapist.score'
+import { Route as TherapistHistoryRouteImport } from './routes/therapist.history'
+import { Route as TherapistComplianceRouteImport } from './routes/therapist.compliance'
+import { Route as PatientVideoRouteImport } from './routes/patient.video'
+import { Route as PatientRepetitionsRouteImport } from './routes/patient.repetitions'
+import { Route as PatientRemindersRouteImport } from './routes/patient.reminders'
+import { Route as PatientRecordingRouteImport } from './routes/patient.recording'
+import { Route as PatientGraphicsRouteImport } from './routes/patient.graphics'
+import { Route as PatientDurationRouteImport } from './routes/patient.duration'
+import { Route as PatientComplianceRouteImport } from './routes/patient.compliance'
 
 const TherapistRoute = TherapistRouteImport.update({
   id: '/therapist',
@@ -28,35 +41,185 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TherapistIndexRoute = TherapistIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => TherapistRoute,
+} as any)
+const PatientIndexRoute = PatientIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PatientRoute,
+} as any)
+const TherapistTeleconsultationRoute =
+  TherapistTeleconsultationRouteImport.update({
+    id: '/teleconsultation',
+    path: '/teleconsultation',
+    getParentRoute: () => TherapistRoute,
+  } as any)
+const TherapistScoreRoute = TherapistScoreRouteImport.update({
+  id: '/score',
+  path: '/score',
+  getParentRoute: () => TherapistRoute,
+} as any)
+const TherapistHistoryRoute = TherapistHistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => TherapistRoute,
+} as any)
+const TherapistComplianceRoute = TherapistComplianceRouteImport.update({
+  id: '/compliance',
+  path: '/compliance',
+  getParentRoute: () => TherapistRoute,
+} as any)
+const PatientVideoRoute = PatientVideoRouteImport.update({
+  id: '/video',
+  path: '/video',
+  getParentRoute: () => PatientRoute,
+} as any)
+const PatientRepetitionsRoute = PatientRepetitionsRouteImport.update({
+  id: '/repetitions',
+  path: '/repetitions',
+  getParentRoute: () => PatientRoute,
+} as any)
+const PatientRemindersRoute = PatientRemindersRouteImport.update({
+  id: '/reminders',
+  path: '/reminders',
+  getParentRoute: () => PatientRoute,
+} as any)
+const PatientRecordingRoute = PatientRecordingRouteImport.update({
+  id: '/recording',
+  path: '/recording',
+  getParentRoute: () => PatientRoute,
+} as any)
+const PatientGraphicsRoute = PatientGraphicsRouteImport.update({
+  id: '/graphics',
+  path: '/graphics',
+  getParentRoute: () => PatientRoute,
+} as any)
+const PatientDurationRoute = PatientDurationRouteImport.update({
+  id: '/duration',
+  path: '/duration',
+  getParentRoute: () => PatientRoute,
+} as any)
+const PatientComplianceRoute = PatientComplianceRouteImport.update({
+  id: '/compliance',
+  path: '/compliance',
+  getParentRoute: () => PatientRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/patient': typeof PatientRoute
-  '/therapist': typeof TherapistRoute
+  '/patient': typeof PatientRouteWithChildren
+  '/therapist': typeof TherapistRouteWithChildren
+  '/patient/compliance': typeof PatientComplianceRoute
+  '/patient/duration': typeof PatientDurationRoute
+  '/patient/graphics': typeof PatientGraphicsRoute
+  '/patient/recording': typeof PatientRecordingRoute
+  '/patient/reminders': typeof PatientRemindersRoute
+  '/patient/repetitions': typeof PatientRepetitionsRoute
+  '/patient/video': typeof PatientVideoRoute
+  '/therapist/compliance': typeof TherapistComplianceRoute
+  '/therapist/history': typeof TherapistHistoryRoute
+  '/therapist/score': typeof TherapistScoreRoute
+  '/therapist/teleconsultation': typeof TherapistTeleconsultationRoute
+  '/patient/': typeof PatientIndexRoute
+  '/therapist/': typeof TherapistIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/patient': typeof PatientRoute
-  '/therapist': typeof TherapistRoute
+  '/patient/compliance': typeof PatientComplianceRoute
+  '/patient/duration': typeof PatientDurationRoute
+  '/patient/graphics': typeof PatientGraphicsRoute
+  '/patient/recording': typeof PatientRecordingRoute
+  '/patient/reminders': typeof PatientRemindersRoute
+  '/patient/repetitions': typeof PatientRepetitionsRoute
+  '/patient/video': typeof PatientVideoRoute
+  '/therapist/compliance': typeof TherapistComplianceRoute
+  '/therapist/history': typeof TherapistHistoryRoute
+  '/therapist/score': typeof TherapistScoreRoute
+  '/therapist/teleconsultation': typeof TherapistTeleconsultationRoute
+  '/patient': typeof PatientIndexRoute
+  '/therapist': typeof TherapistIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/patient': typeof PatientRoute
-  '/therapist': typeof TherapistRoute
+  '/patient': typeof PatientRouteWithChildren
+  '/therapist': typeof TherapistRouteWithChildren
+  '/patient/compliance': typeof PatientComplianceRoute
+  '/patient/duration': typeof PatientDurationRoute
+  '/patient/graphics': typeof PatientGraphicsRoute
+  '/patient/recording': typeof PatientRecordingRoute
+  '/patient/reminders': typeof PatientRemindersRoute
+  '/patient/repetitions': typeof PatientRepetitionsRoute
+  '/patient/video': typeof PatientVideoRoute
+  '/therapist/compliance': typeof TherapistComplianceRoute
+  '/therapist/history': typeof TherapistHistoryRoute
+  '/therapist/score': typeof TherapistScoreRoute
+  '/therapist/teleconsultation': typeof TherapistTeleconsultationRoute
+  '/patient/': typeof PatientIndexRoute
+  '/therapist/': typeof TherapistIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/patient' | '/therapist'
+  fullPaths:
+    | '/'
+    | '/patient'
+    | '/therapist'
+    | '/patient/compliance'
+    | '/patient/duration'
+    | '/patient/graphics'
+    | '/patient/recording'
+    | '/patient/reminders'
+    | '/patient/repetitions'
+    | '/patient/video'
+    | '/therapist/compliance'
+    | '/therapist/history'
+    | '/therapist/score'
+    | '/therapist/teleconsultation'
+    | '/patient/'
+    | '/therapist/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/patient' | '/therapist'
-  id: '__root__' | '/' | '/patient' | '/therapist'
+  to:
+    | '/'
+    | '/patient/compliance'
+    | '/patient/duration'
+    | '/patient/graphics'
+    | '/patient/recording'
+    | '/patient/reminders'
+    | '/patient/repetitions'
+    | '/patient/video'
+    | '/therapist/compliance'
+    | '/therapist/history'
+    | '/therapist/score'
+    | '/therapist/teleconsultation'
+    | '/patient'
+    | '/therapist'
+  id:
+    | '__root__'
+    | '/'
+    | '/patient'
+    | '/therapist'
+    | '/patient/compliance'
+    | '/patient/duration'
+    | '/patient/graphics'
+    | '/patient/recording'
+    | '/patient/reminders'
+    | '/patient/repetitions'
+    | '/patient/video'
+    | '/therapist/compliance'
+    | '/therapist/history'
+    | '/therapist/score'
+    | '/therapist/teleconsultation'
+    | '/patient/'
+    | '/therapist/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  PatientRoute: typeof PatientRoute
-  TherapistRoute: typeof TherapistRoute
+  PatientRoute: typeof PatientRouteWithChildren
+  TherapistRoute: typeof TherapistRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -82,14 +245,160 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/therapist/': {
+      id: '/therapist/'
+      path: '/'
+      fullPath: '/therapist/'
+      preLoaderRoute: typeof TherapistIndexRouteImport
+      parentRoute: typeof TherapistRoute
+    }
+    '/patient/': {
+      id: '/patient/'
+      path: '/'
+      fullPath: '/patient/'
+      preLoaderRoute: typeof PatientIndexRouteImport
+      parentRoute: typeof PatientRoute
+    }
+    '/therapist/teleconsultation': {
+      id: '/therapist/teleconsultation'
+      path: '/teleconsultation'
+      fullPath: '/therapist/teleconsultation'
+      preLoaderRoute: typeof TherapistTeleconsultationRouteImport
+      parentRoute: typeof TherapistRoute
+    }
+    '/therapist/score': {
+      id: '/therapist/score'
+      path: '/score'
+      fullPath: '/therapist/score'
+      preLoaderRoute: typeof TherapistScoreRouteImport
+      parentRoute: typeof TherapistRoute
+    }
+    '/therapist/history': {
+      id: '/therapist/history'
+      path: '/history'
+      fullPath: '/therapist/history'
+      preLoaderRoute: typeof TherapistHistoryRouteImport
+      parentRoute: typeof TherapistRoute
+    }
+    '/therapist/compliance': {
+      id: '/therapist/compliance'
+      path: '/compliance'
+      fullPath: '/therapist/compliance'
+      preLoaderRoute: typeof TherapistComplianceRouteImport
+      parentRoute: typeof TherapistRoute
+    }
+    '/patient/video': {
+      id: '/patient/video'
+      path: '/video'
+      fullPath: '/patient/video'
+      preLoaderRoute: typeof PatientVideoRouteImport
+      parentRoute: typeof PatientRoute
+    }
+    '/patient/repetitions': {
+      id: '/patient/repetitions'
+      path: '/repetitions'
+      fullPath: '/patient/repetitions'
+      preLoaderRoute: typeof PatientRepetitionsRouteImport
+      parentRoute: typeof PatientRoute
+    }
+    '/patient/reminders': {
+      id: '/patient/reminders'
+      path: '/reminders'
+      fullPath: '/patient/reminders'
+      preLoaderRoute: typeof PatientRemindersRouteImport
+      parentRoute: typeof PatientRoute
+    }
+    '/patient/recording': {
+      id: '/patient/recording'
+      path: '/recording'
+      fullPath: '/patient/recording'
+      preLoaderRoute: typeof PatientRecordingRouteImport
+      parentRoute: typeof PatientRoute
+    }
+    '/patient/graphics': {
+      id: '/patient/graphics'
+      path: '/graphics'
+      fullPath: '/patient/graphics'
+      preLoaderRoute: typeof PatientGraphicsRouteImport
+      parentRoute: typeof PatientRoute
+    }
+    '/patient/duration': {
+      id: '/patient/duration'
+      path: '/duration'
+      fullPath: '/patient/duration'
+      preLoaderRoute: typeof PatientDurationRouteImport
+      parentRoute: typeof PatientRoute
+    }
+    '/patient/compliance': {
+      id: '/patient/compliance'
+      path: '/compliance'
+      fullPath: '/patient/compliance'
+      preLoaderRoute: typeof PatientComplianceRouteImport
+      parentRoute: typeof PatientRoute
+    }
   }
 }
 
+interface PatientRouteChildren {
+  PatientComplianceRoute: typeof PatientComplianceRoute
+  PatientDurationRoute: typeof PatientDurationRoute
+  PatientGraphicsRoute: typeof PatientGraphicsRoute
+  PatientRecordingRoute: typeof PatientRecordingRoute
+  PatientRemindersRoute: typeof PatientRemindersRoute
+  PatientRepetitionsRoute: typeof PatientRepetitionsRoute
+  PatientVideoRoute: typeof PatientVideoRoute
+  PatientIndexRoute: typeof PatientIndexRoute
+}
+
+const PatientRouteChildren: PatientRouteChildren = {
+  PatientComplianceRoute: PatientComplianceRoute,
+  PatientDurationRoute: PatientDurationRoute,
+  PatientGraphicsRoute: PatientGraphicsRoute,
+  PatientRecordingRoute: PatientRecordingRoute,
+  PatientRemindersRoute: PatientRemindersRoute,
+  PatientRepetitionsRoute: PatientRepetitionsRoute,
+  PatientVideoRoute: PatientVideoRoute,
+  PatientIndexRoute: PatientIndexRoute,
+}
+
+const PatientRouteWithChildren =
+  PatientRoute._addFileChildren(PatientRouteChildren)
+
+interface TherapistRouteChildren {
+  TherapistComplianceRoute: typeof TherapistComplianceRoute
+  TherapistHistoryRoute: typeof TherapistHistoryRoute
+  TherapistScoreRoute: typeof TherapistScoreRoute
+  TherapistTeleconsultationRoute: typeof TherapistTeleconsultationRoute
+  TherapistIndexRoute: typeof TherapistIndexRoute
+}
+
+const TherapistRouteChildren: TherapistRouteChildren = {
+  TherapistComplianceRoute: TherapistComplianceRoute,
+  TherapistHistoryRoute: TherapistHistoryRoute,
+  TherapistScoreRoute: TherapistScoreRoute,
+  TherapistTeleconsultationRoute: TherapistTeleconsultationRoute,
+  TherapistIndexRoute: TherapistIndexRoute,
+}
+
+const TherapistRouteWithChildren = TherapistRoute._addFileChildren(
+  TherapistRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  PatientRoute: PatientRoute,
-  TherapistRoute: TherapistRoute,
+  PatientRoute: PatientRouteWithChildren,
+  TherapistRoute: TherapistRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

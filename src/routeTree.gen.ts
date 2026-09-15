@@ -28,6 +28,7 @@ import { Route as PatientGraphicsRouteImport } from './routes/patient.graphics'
 import { Route as PatientDurationRouteImport } from './routes/patient.duration'
 import { Route as PatientComplianceRouteImport } from './routes/patient.compliance'
 import { Route as OnboardingScreeningRouteImport } from './routes/onboarding.screening'
+import { Route as OnboardingRedFlagsRouteImport } from './routes/onboarding.red-flags'
 
 const TherapistRoute = TherapistRouteImport.update({
   id: '/therapist',
@@ -125,12 +126,18 @@ const OnboardingScreeningRoute = OnboardingScreeningRouteImport.update({
   path: '/screening',
   getParentRoute: () => OnboardingRoute,
 } as any)
+const OnboardingRedFlagsRoute = OnboardingRedFlagsRouteImport.update({
+  id: '/red-flags',
+  path: '/red-flags',
+  getParentRoute: () => OnboardingRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/onboarding': typeof OnboardingRouteWithChildren
   '/patient': typeof PatientRouteWithChildren
   '/therapist': typeof TherapistRouteWithChildren
+  '/onboarding/red-flags': typeof OnboardingRedFlagsRoute
   '/onboarding/screening': typeof OnboardingScreeningRoute
   '/patient/compliance': typeof PatientComplianceRoute
   '/patient/duration': typeof PatientDurationRoute
@@ -149,6 +156,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/onboarding/red-flags': typeof OnboardingRedFlagsRoute
   '/onboarding/screening': typeof OnboardingScreeningRoute
   '/patient/compliance': typeof PatientComplianceRoute
   '/patient/duration': typeof PatientDurationRoute
@@ -171,6 +179,7 @@ export interface FileRoutesById {
   '/onboarding': typeof OnboardingRouteWithChildren
   '/patient': typeof PatientRouteWithChildren
   '/therapist': typeof TherapistRouteWithChildren
+  '/onboarding/red-flags': typeof OnboardingRedFlagsRoute
   '/onboarding/screening': typeof OnboardingScreeningRoute
   '/patient/compliance': typeof PatientComplianceRoute
   '/patient/duration': typeof PatientDurationRoute
@@ -194,6 +203,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/patient'
     | '/therapist'
+    | '/onboarding/red-flags'
     | '/onboarding/screening'
     | '/patient/compliance'
     | '/patient/duration'
@@ -212,6 +222,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/onboarding/red-flags'
     | '/onboarding/screening'
     | '/patient/compliance'
     | '/patient/duration'
@@ -233,6 +244,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/patient'
     | '/therapist'
+    | '/onboarding/red-flags'
     | '/onboarding/screening'
     | '/patient/compliance'
     | '/patient/duration'
@@ -392,15 +404,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OnboardingScreeningRouteImport
       parentRoute: typeof OnboardingRoute
     }
+    '/onboarding/red-flags': {
+      id: '/onboarding/red-flags'
+      path: '/red-flags'
+      fullPath: '/onboarding/red-flags'
+      preLoaderRoute: typeof OnboardingRedFlagsRouteImport
+      parentRoute: typeof OnboardingRoute
+    }
   }
 }
 
 interface OnboardingRouteChildren {
+  OnboardingRedFlagsRoute: typeof OnboardingRedFlagsRoute
   OnboardingScreeningRoute: typeof OnboardingScreeningRoute
   OnboardingIndexRoute: typeof OnboardingIndexRoute
 }
 
 const OnboardingRouteChildren: OnboardingRouteChildren = {
+  OnboardingRedFlagsRoute: OnboardingRedFlagsRoute,
   OnboardingScreeningRoute: OnboardingScreeningRoute,
   OnboardingIndexRoute: OnboardingIndexRoute,
 }

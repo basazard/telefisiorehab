@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TherapistRouteImport } from './routes/therapist'
 import { Route as PatientRouteImport } from './routes/patient'
+import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TherapistIndexRouteImport } from './routes/therapist.index'
 import { Route as PatientIndexRouteImport } from './routes/patient.index'
@@ -34,6 +35,11 @@ const TherapistRoute = TherapistRouteImport.update({
 const PatientRoute = PatientRouteImport.update({
   id: '/patient',
   path: '/patient',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingRoute = OnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -110,6 +116,7 @@ const PatientComplianceRoute = PatientComplianceRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/onboarding': typeof OnboardingRoute
   '/patient': typeof PatientRouteWithChildren
   '/therapist': typeof TherapistRouteWithChildren
   '/patient/compliance': typeof PatientComplianceRoute
@@ -128,6 +135,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/onboarding': typeof OnboardingRoute
   '/patient/compliance': typeof PatientComplianceRoute
   '/patient/duration': typeof PatientDurationRoute
   '/patient/graphics': typeof PatientGraphicsRoute
@@ -145,6 +153,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/onboarding': typeof OnboardingRoute
   '/patient': typeof PatientRouteWithChildren
   '/therapist': typeof TherapistRouteWithChildren
   '/patient/compliance': typeof PatientComplianceRoute
@@ -165,6 +174,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/onboarding'
     | '/patient'
     | '/therapist'
     | '/patient/compliance'
@@ -183,6 +193,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/onboarding'
     | '/patient/compliance'
     | '/patient/duration'
     | '/patient/graphics'
@@ -199,6 +210,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/onboarding'
     | '/patient'
     | '/therapist'
     | '/patient/compliance'
@@ -218,6 +230,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  OnboardingRoute: typeof OnboardingRoute
   PatientRoute: typeof PatientRouteWithChildren
   TherapistRoute: typeof TherapistRouteWithChildren
 }
@@ -236,6 +249,13 @@ declare module '@tanstack/react-router' {
       path: '/patient'
       fullPath: '/patient'
       preLoaderRoute: typeof PatientRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -386,6 +406,7 @@ const TherapistRouteWithChildren = TherapistRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  OnboardingRoute: OnboardingRoute,
   PatientRoute: PatientRouteWithChildren,
   TherapistRoute: TherapistRouteWithChildren,
 }

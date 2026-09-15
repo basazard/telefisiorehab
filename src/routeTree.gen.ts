@@ -28,7 +28,9 @@ import { Route as PatientGraphicsRouteImport } from './routes/patient.graphics'
 import { Route as PatientDurationRouteImport } from './routes/patient.duration'
 import { Route as PatientComplianceRouteImport } from './routes/patient.compliance'
 import { Route as OnboardingScreeningRouteImport } from './routes/onboarding.screening'
+import { Route as OnboardingResultsRouteImport } from './routes/onboarding.results'
 import { Route as OnboardingRedFlagsRouteImport } from './routes/onboarding.red-flags'
+import { Route as OnboardingAssessmentRouteImport } from './routes/onboarding.assessment'
 
 const TherapistRoute = TherapistRouteImport.update({
   id: '/therapist',
@@ -126,9 +128,19 @@ const OnboardingScreeningRoute = OnboardingScreeningRouteImport.update({
   path: '/screening',
   getParentRoute: () => OnboardingRoute,
 } as any)
+const OnboardingResultsRoute = OnboardingResultsRouteImport.update({
+  id: '/results',
+  path: '/results',
+  getParentRoute: () => OnboardingRoute,
+} as any)
 const OnboardingRedFlagsRoute = OnboardingRedFlagsRouteImport.update({
   id: '/red-flags',
   path: '/red-flags',
+  getParentRoute: () => OnboardingRoute,
+} as any)
+const OnboardingAssessmentRoute = OnboardingAssessmentRouteImport.update({
+  id: '/assessment',
+  path: '/assessment',
   getParentRoute: () => OnboardingRoute,
 } as any)
 
@@ -137,7 +149,9 @@ export interface FileRoutesByFullPath {
   '/onboarding': typeof OnboardingRouteWithChildren
   '/patient': typeof PatientRouteWithChildren
   '/therapist': typeof TherapistRouteWithChildren
+  '/onboarding/assessment': typeof OnboardingAssessmentRoute
   '/onboarding/red-flags': typeof OnboardingRedFlagsRoute
+  '/onboarding/results': typeof OnboardingResultsRoute
   '/onboarding/screening': typeof OnboardingScreeningRoute
   '/patient/compliance': typeof PatientComplianceRoute
   '/patient/duration': typeof PatientDurationRoute
@@ -156,7 +170,9 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/onboarding/assessment': typeof OnboardingAssessmentRoute
   '/onboarding/red-flags': typeof OnboardingRedFlagsRoute
+  '/onboarding/results': typeof OnboardingResultsRoute
   '/onboarding/screening': typeof OnboardingScreeningRoute
   '/patient/compliance': typeof PatientComplianceRoute
   '/patient/duration': typeof PatientDurationRoute
@@ -179,7 +195,9 @@ export interface FileRoutesById {
   '/onboarding': typeof OnboardingRouteWithChildren
   '/patient': typeof PatientRouteWithChildren
   '/therapist': typeof TherapistRouteWithChildren
+  '/onboarding/assessment': typeof OnboardingAssessmentRoute
   '/onboarding/red-flags': typeof OnboardingRedFlagsRoute
+  '/onboarding/results': typeof OnboardingResultsRoute
   '/onboarding/screening': typeof OnboardingScreeningRoute
   '/patient/compliance': typeof PatientComplianceRoute
   '/patient/duration': typeof PatientDurationRoute
@@ -203,7 +221,9 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/patient'
     | '/therapist'
+    | '/onboarding/assessment'
     | '/onboarding/red-flags'
+    | '/onboarding/results'
     | '/onboarding/screening'
     | '/patient/compliance'
     | '/patient/duration'
@@ -222,7 +242,9 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/onboarding/assessment'
     | '/onboarding/red-flags'
+    | '/onboarding/results'
     | '/onboarding/screening'
     | '/patient/compliance'
     | '/patient/duration'
@@ -244,7 +266,9 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/patient'
     | '/therapist'
+    | '/onboarding/assessment'
     | '/onboarding/red-flags'
+    | '/onboarding/results'
     | '/onboarding/screening'
     | '/patient/compliance'
     | '/patient/duration'
@@ -404,6 +428,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OnboardingScreeningRouteImport
       parentRoute: typeof OnboardingRoute
     }
+    '/onboarding/results': {
+      id: '/onboarding/results'
+      path: '/results'
+      fullPath: '/onboarding/results'
+      preLoaderRoute: typeof OnboardingResultsRouteImport
+      parentRoute: typeof OnboardingRoute
+    }
     '/onboarding/red-flags': {
       id: '/onboarding/red-flags'
       path: '/red-flags'
@@ -411,17 +442,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OnboardingRedFlagsRouteImport
       parentRoute: typeof OnboardingRoute
     }
+    '/onboarding/assessment': {
+      id: '/onboarding/assessment'
+      path: '/assessment'
+      fullPath: '/onboarding/assessment'
+      preLoaderRoute: typeof OnboardingAssessmentRouteImport
+      parentRoute: typeof OnboardingRoute
+    }
   }
 }
 
 interface OnboardingRouteChildren {
+  OnboardingAssessmentRoute: typeof OnboardingAssessmentRoute
   OnboardingRedFlagsRoute: typeof OnboardingRedFlagsRoute
+  OnboardingResultsRoute: typeof OnboardingResultsRoute
   OnboardingScreeningRoute: typeof OnboardingScreeningRoute
   OnboardingIndexRoute: typeof OnboardingIndexRoute
 }
 
 const OnboardingRouteChildren: OnboardingRouteChildren = {
+  OnboardingAssessmentRoute: OnboardingAssessmentRoute,
   OnboardingRedFlagsRoute: OnboardingRedFlagsRoute,
+  OnboardingResultsRoute: OnboardingResultsRoute,
   OnboardingScreeningRoute: OnboardingScreeningRoute,
   OnboardingIndexRoute: OnboardingIndexRoute,
 }

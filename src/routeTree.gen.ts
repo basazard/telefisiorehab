@@ -11,9 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TherapistRouteImport } from './routes/therapist'
 import { Route as PatientRouteImport } from './routes/patient'
+import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TherapistIndexRouteImport } from './routes/therapist.index'
 import { Route as PatientIndexRouteImport } from './routes/patient.index'
+import { Route as OnboardingIndexRouteImport } from './routes/onboarding.index'
 import { Route as TherapistTeleconsultationRouteImport } from './routes/therapist.teleconsultation'
 import { Route as TherapistScoreRouteImport } from './routes/therapist.score'
 import { Route as TherapistHistoryRouteImport } from './routes/therapist.history'
@@ -25,6 +27,10 @@ import { Route as PatientRecordingRouteImport } from './routes/patient.recording
 import { Route as PatientGraphicsRouteImport } from './routes/patient.graphics'
 import { Route as PatientDurationRouteImport } from './routes/patient.duration'
 import { Route as PatientComplianceRouteImport } from './routes/patient.compliance'
+import { Route as OnboardingScreeningRouteImport } from './routes/onboarding.screening'
+import { Route as OnboardingResultsRouteImport } from './routes/onboarding.results'
+import { Route as OnboardingRedFlagsRouteImport } from './routes/onboarding.red-flags'
+import { Route as OnboardingAssessmentRouteImport } from './routes/onboarding.assessment'
 
 const TherapistRoute = TherapistRouteImport.update({
   id: '/therapist',
@@ -34,6 +40,11 @@ const TherapistRoute = TherapistRouteImport.update({
 const PatientRoute = PatientRouteImport.update({
   id: '/patient',
   path: '/patient',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingRoute = OnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -50,6 +61,11 @@ const PatientIndexRoute = PatientIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => PatientRoute,
+} as any)
+const OnboardingIndexRoute = OnboardingIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => OnboardingRoute,
 } as any)
 const TherapistTeleconsultationRoute =
   TherapistTeleconsultationRouteImport.update({
@@ -107,11 +123,36 @@ const PatientComplianceRoute = PatientComplianceRouteImport.update({
   path: '/compliance',
   getParentRoute: () => PatientRoute,
 } as any)
+const OnboardingScreeningRoute = OnboardingScreeningRouteImport.update({
+  id: '/screening',
+  path: '/screening',
+  getParentRoute: () => OnboardingRoute,
+} as any)
+const OnboardingResultsRoute = OnboardingResultsRouteImport.update({
+  id: '/results',
+  path: '/results',
+  getParentRoute: () => OnboardingRoute,
+} as any)
+const OnboardingRedFlagsRoute = OnboardingRedFlagsRouteImport.update({
+  id: '/red-flags',
+  path: '/red-flags',
+  getParentRoute: () => OnboardingRoute,
+} as any)
+const OnboardingAssessmentRoute = OnboardingAssessmentRouteImport.update({
+  id: '/assessment',
+  path: '/assessment',
+  getParentRoute: () => OnboardingRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/onboarding': typeof OnboardingRouteWithChildren
   '/patient': typeof PatientRouteWithChildren
   '/therapist': typeof TherapistRouteWithChildren
+  '/onboarding/assessment': typeof OnboardingAssessmentRoute
+  '/onboarding/red-flags': typeof OnboardingRedFlagsRoute
+  '/onboarding/results': typeof OnboardingResultsRoute
+  '/onboarding/screening': typeof OnboardingScreeningRoute
   '/patient/compliance': typeof PatientComplianceRoute
   '/patient/duration': typeof PatientDurationRoute
   '/patient/graphics': typeof PatientGraphicsRoute
@@ -123,11 +164,16 @@ export interface FileRoutesByFullPath {
   '/therapist/history': typeof TherapistHistoryRoute
   '/therapist/score': typeof TherapistScoreRoute
   '/therapist/teleconsultation': typeof TherapistTeleconsultationRoute
+  '/onboarding/': typeof OnboardingIndexRoute
   '/patient/': typeof PatientIndexRoute
   '/therapist/': typeof TherapistIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/onboarding/assessment': typeof OnboardingAssessmentRoute
+  '/onboarding/red-flags': typeof OnboardingRedFlagsRoute
+  '/onboarding/results': typeof OnboardingResultsRoute
+  '/onboarding/screening': typeof OnboardingScreeningRoute
   '/patient/compliance': typeof PatientComplianceRoute
   '/patient/duration': typeof PatientDurationRoute
   '/patient/graphics': typeof PatientGraphicsRoute
@@ -139,14 +185,20 @@ export interface FileRoutesByTo {
   '/therapist/history': typeof TherapistHistoryRoute
   '/therapist/score': typeof TherapistScoreRoute
   '/therapist/teleconsultation': typeof TherapistTeleconsultationRoute
+  '/onboarding': typeof OnboardingIndexRoute
   '/patient': typeof PatientIndexRoute
   '/therapist': typeof TherapistIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/onboarding': typeof OnboardingRouteWithChildren
   '/patient': typeof PatientRouteWithChildren
   '/therapist': typeof TherapistRouteWithChildren
+  '/onboarding/assessment': typeof OnboardingAssessmentRoute
+  '/onboarding/red-flags': typeof OnboardingRedFlagsRoute
+  '/onboarding/results': typeof OnboardingResultsRoute
+  '/onboarding/screening': typeof OnboardingScreeningRoute
   '/patient/compliance': typeof PatientComplianceRoute
   '/patient/duration': typeof PatientDurationRoute
   '/patient/graphics': typeof PatientGraphicsRoute
@@ -158,6 +210,7 @@ export interface FileRoutesById {
   '/therapist/history': typeof TherapistHistoryRoute
   '/therapist/score': typeof TherapistScoreRoute
   '/therapist/teleconsultation': typeof TherapistTeleconsultationRoute
+  '/onboarding/': typeof OnboardingIndexRoute
   '/patient/': typeof PatientIndexRoute
   '/therapist/': typeof TherapistIndexRoute
 }
@@ -165,8 +218,13 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/onboarding'
     | '/patient'
     | '/therapist'
+    | '/onboarding/assessment'
+    | '/onboarding/red-flags'
+    | '/onboarding/results'
+    | '/onboarding/screening'
     | '/patient/compliance'
     | '/patient/duration'
     | '/patient/graphics'
@@ -178,11 +236,16 @@ export interface FileRouteTypes {
     | '/therapist/history'
     | '/therapist/score'
     | '/therapist/teleconsultation'
+    | '/onboarding/'
     | '/patient/'
     | '/therapist/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/onboarding/assessment'
+    | '/onboarding/red-flags'
+    | '/onboarding/results'
+    | '/onboarding/screening'
     | '/patient/compliance'
     | '/patient/duration'
     | '/patient/graphics'
@@ -194,13 +257,19 @@ export interface FileRouteTypes {
     | '/therapist/history'
     | '/therapist/score'
     | '/therapist/teleconsultation'
+    | '/onboarding'
     | '/patient'
     | '/therapist'
   id:
     | '__root__'
     | '/'
+    | '/onboarding'
     | '/patient'
     | '/therapist'
+    | '/onboarding/assessment'
+    | '/onboarding/red-flags'
+    | '/onboarding/results'
+    | '/onboarding/screening'
     | '/patient/compliance'
     | '/patient/duration'
     | '/patient/graphics'
@@ -212,12 +281,14 @@ export interface FileRouteTypes {
     | '/therapist/history'
     | '/therapist/score'
     | '/therapist/teleconsultation'
+    | '/onboarding/'
     | '/patient/'
     | '/therapist/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  OnboardingRoute: typeof OnboardingRouteWithChildren
   PatientRoute: typeof PatientRouteWithChildren
   TherapistRoute: typeof TherapistRouteWithChildren
 }
@@ -236,6 +307,13 @@ declare module '@tanstack/react-router' {
       path: '/patient'
       fullPath: '/patient'
       preLoaderRoute: typeof PatientRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -258,6 +336,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/patient/'
       preLoaderRoute: typeof PatientIndexRouteImport
       parentRoute: typeof PatientRoute
+    }
+    '/onboarding/': {
+      id: '/onboarding/'
+      path: '/'
+      fullPath: '/onboarding/'
+      preLoaderRoute: typeof OnboardingIndexRouteImport
+      parentRoute: typeof OnboardingRoute
     }
     '/therapist/teleconsultation': {
       id: '/therapist/teleconsultation'
@@ -336,8 +421,56 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PatientComplianceRouteImport
       parentRoute: typeof PatientRoute
     }
+    '/onboarding/screening': {
+      id: '/onboarding/screening'
+      path: '/screening'
+      fullPath: '/onboarding/screening'
+      preLoaderRoute: typeof OnboardingScreeningRouteImport
+      parentRoute: typeof OnboardingRoute
+    }
+    '/onboarding/results': {
+      id: '/onboarding/results'
+      path: '/results'
+      fullPath: '/onboarding/results'
+      preLoaderRoute: typeof OnboardingResultsRouteImport
+      parentRoute: typeof OnboardingRoute
+    }
+    '/onboarding/red-flags': {
+      id: '/onboarding/red-flags'
+      path: '/red-flags'
+      fullPath: '/onboarding/red-flags'
+      preLoaderRoute: typeof OnboardingRedFlagsRouteImport
+      parentRoute: typeof OnboardingRoute
+    }
+    '/onboarding/assessment': {
+      id: '/onboarding/assessment'
+      path: '/assessment'
+      fullPath: '/onboarding/assessment'
+      preLoaderRoute: typeof OnboardingAssessmentRouteImport
+      parentRoute: typeof OnboardingRoute
+    }
   }
 }
+
+interface OnboardingRouteChildren {
+  OnboardingAssessmentRoute: typeof OnboardingAssessmentRoute
+  OnboardingRedFlagsRoute: typeof OnboardingRedFlagsRoute
+  OnboardingResultsRoute: typeof OnboardingResultsRoute
+  OnboardingScreeningRoute: typeof OnboardingScreeningRoute
+  OnboardingIndexRoute: typeof OnboardingIndexRoute
+}
+
+const OnboardingRouteChildren: OnboardingRouteChildren = {
+  OnboardingAssessmentRoute: OnboardingAssessmentRoute,
+  OnboardingRedFlagsRoute: OnboardingRedFlagsRoute,
+  OnboardingResultsRoute: OnboardingResultsRoute,
+  OnboardingScreeningRoute: OnboardingScreeningRoute,
+  OnboardingIndexRoute: OnboardingIndexRoute,
+}
+
+const OnboardingRouteWithChildren = OnboardingRoute._addFileChildren(
+  OnboardingRouteChildren,
+)
 
 interface PatientRouteChildren {
   PatientComplianceRoute: typeof PatientComplianceRoute
@@ -386,6 +519,7 @@ const TherapistRouteWithChildren = TherapistRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  OnboardingRoute: OnboardingRouteWithChildren,
   PatientRoute: PatientRouteWithChildren,
   TherapistRoute: TherapistRouteWithChildren,
 }
